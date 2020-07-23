@@ -136,3 +136,11 @@ Autentication process is very simple and requires two parameters.
 | ------------- | ------------- | ------------- |
 | URL | URL to the root of WHMCS that can be found on `Setup > General Settings > General > WHMCS SystemURL`. Trailing slash `/` is required. | Yes |
 | Token | Must be equal to the one you have in `Addons > Billing Extension > Settings > WebService > Token` | Yes |
+
+# Additional Parameters
+
+| Request Parameters |
+| Parameter | Description | Required |
+| ------------- | ------------- | ------------- |
+| URL | URL to the root of WHMCS that can be found on `Setup > General Settings > General > WHMCS SystemURL`. Trailing slash `/` is required. | Yes |
+| Token | Must be equal to the one you have in `Addons > Billing Extension > Settings > WebService > Token` | Yes |
