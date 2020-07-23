@@ -126,7 +126,7 @@ Second. Locate and enable `WebService` from plugin list. When prompted go back S
 
 ![image](https://katamaze.com/modules/addons/Mercury/uploads/files/Documentation/d73d422c17dda17218706f69299f3c97/whmcs-webservice-api-invoicing-token.png)
 
-Third. Click the orange button to randomly generate a token to secure transmissions via web service. Note down the token.
+Third. Click the orange button to randomly generate a token to secure transmissions via web service. Note down the token and use this [sample code](https://github.com/Katamaze/WHMCS-Electronic-Invoicing-Web-Service/edit/master/webservice/Example.php) as reference.
 
 # Authentication
 
@@ -137,10 +137,63 @@ Autentication process is very simple and requires two parameters.
 | URL | URL to the root of WHMCS that can be found on `Setup > General Settings > General > WHMCS SystemURL`. Trailing slash `/` is required. | Yes |
 | Token | Must be equal to the one you have in `Addons > Billing Extension > Settings > WebService > Token` | Yes |
 
-# Additional Parameters
+# Request Parameters
 
-| Request Parameters |
+The following additional parameters allows to apply filters to when you `Get` documents (invoices and credit notes) from WHMCS.
+
 | Parameter | Description | Required |
 | ------------- | ------------- | ------------- |
-| URL | URL to the root of WHMCS that can be found on `Setup > General Settings > General > WHMCS SystemURL`. Trailing slash `/` is required. | Yes |
-| Token | Must be equal to the one you have in `Addons > Billing Extension > Settings > WebService > Token` | Yes |
+| action | Must be equal to `Get` | Yes |
+| start | The starting date for the returned results. Supports `YYYY-MM-DD` dates, `integers` (5 returns last 5 days) and `keywords` (yesterday, month to date, last year etc.). Leave empty to get all invoices | No |
+| end | If `start` is set in `YYYY-MM-DD` format, `end` can be used to select invoices between a range of dates (eg. `start` 2019-06-01 `end` 2019-06-15) | No |
+| invoicenum | Select the invoice with this specific Invoice Number. If in use, `start` and `end` parameters are ignored. It can't be used together with `invoiceid` | No |
+| invoiceid | Select the invoice with this specific Invoice ID. Must be an `integer`. If in use, `start` and `end` values are ignored. It can't be used together with `invoicenum` | No |
+| doctype | `Invoice` and `CreditNote` return invoices and credit notes respectively. If empty, both are returned | No |
+
+# Response Parameters
+
+| Node | Parameter | Description |
+| ------------- | ------------- | ------------- |
+| ClientData | UserID | User ID in `tblclients.id` table |
+| ClientData | Firstname | Firstname (eg. *Jack*) |
+| ClientData | Lastname | Lastname (eg. *Black*) |
+| ClientData | ClientName | Firstname and lastname separated by space (eg. *Jack Black*) |
+| ClientData | CompanyName | Company name |
+| ClientData | Email | Email |
+| ClientData | Address1 | Address 1 |
+| ClientData | Address2 | Address 2 |
+| ClientData | City | City |
+| ClientData | State | State, region, province |
+| ClientData | PostCode | Post code |
+| ClientData | Country | Two-letter ISO country code (eg. `IT`, `DE`, `ES`) |
+| ClientData | PhoneNumber | Phone number |
+| ClientData | Currency | Currency ID of selected customer |
+| ClientData | TaxExempt | `1` is tax exempt `0` is not |
+| ClientData\CustomFields | id | Client custom field ID in `tblcustomfields.id` table |
+| ClientData\CustomFields | fieldname | Client custom field name (eg. VAT Number) |
+| ClientData\CustomFields | value | Client custom field value |
+| ClientData\Europe | MemberState | Two-letter ISO country code (eg. `IT`, `DE`, `ES`) |
+| ClientData\Europe | Region | Used for outermost regions and overseas territories of European Union (`Europe`, `South-America`, `Africa` etc.) |
+| ClientData\Europe | MonetaryUnion | true/false (eg. Italy `true`, Denmark `false`) |
+| ClientData\Europe | VIES | true/false. `true` is for intra-EU companies registered on VIES |
+| ClientData\Europe | MOSS | true/false |
+| DocData | Type | `Invoice` or `CreditNote` |
+| DocData | ID | Document ID in `tblinvoices.id` table |
+| DocData | Num | Document Number (eg. *2020-150*) |
+| DocData | Status | Invoice status (`Paid`, `Draft`, `Unpaid` etc.) |
+| DocData | Date | Date in `YYYY-MM-DD` format |
+| DocData | DueDate | Due date in `YYYY-MM-DD` format |
+| DocData | DatePaid | Date/time when invoice has been paid in `YYYY-MM-DD hh:mm:ss` format |
+| DocData | Subtotal | Subtotal. 2 decimal places. Dot as the decimal separator |
+| DocData | Credit | Credit. 2 decimal places. Dot as the decimal separator |
+| DocData | Tax | Level 1 Tax. 2 decimal places. Dot as the decimal separator |
+| DocData | Tax2 | Level 2 Tax. 2 decimal places. Dot as the decimal separator |
+| DocData | TaxRate | Level 1 Tax Rate. 2 decimal places. Dot as the decimal separator |
+| DocData | TaxRate2 | Level 2 Tax Rate. 2 decimal places. Dot as the decimal separator |
+| DocData | PaymentMethod | Payment gateway System Name (eg. paypal) |
+| DocData\Items | ID | Invoice item ID in `tblinvoiceitems.id` table |
+| DocData\Items | Type | `Setup`, `Hosting`, `Domain`, `Upgrade`, `Item`, `Addon`, `PromoHosting`, `DomainGraceFee`, `LateFee` etc. |
+| DocData\Items | RelID | ID of the related product/service, domain, addon, billing item etc. |
+| DocData\Items | Description | Description (eg. *Renew Domain example.com*) |
+| DocData\Items | Amount | Invoice line amount. 2 decimal places. Dot as the decimal separator |
+| DocData\Items | Taxed | true/false |
