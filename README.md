@@ -128,7 +128,7 @@ Second. Locate and enable `WebService` from plugin list. When prompted go back S
 
 ![image](https://katamaze.com/modules/addons/Mercury/uploads/files/Documentation/d73d422c17dda17218706f69299f3c97/whmcs-webservice-api-invoicing-token.png)
 
-Third. Click the orange button to randomly generate a token to secure transmissions via web service. Note down the token and use this [sample code](https://github.com/Katamaze/WHMCS-Electronic-Invoicing-Web-Service/edit/master/webservice/Example.php) as reference.
+Third. Click the orange button to randomly generate a token to secure transmissions via web service. Note down the token and use this [sample code](https://github.com/Katamaze/WHMCS-Electronic-Invoicing-Web-Service/edit/master/example/Basic.php) as reference.
 
 # Authentication
 
