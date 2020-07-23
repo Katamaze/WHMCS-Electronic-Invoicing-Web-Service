@@ -20,7 +20,9 @@ Hopefully this give you an idea of how a standard installation of WHMCS is incap
 
 Electronic invoicing is spreading around the world and is quickly becoming mandatory in many countries. If you're from **Italy** or **Slovenia** the good news is that Billing Extension already integrates e-invoicing for both countries.
 
-As time goes by, we received a lot of requests from people around the world. They all wanted us to integrate WHMCS & Billing Extension basically with e-invoicing of ANY country of the world. Even though we would like to integrate all countries, this is prohibitive. Let us put it into perspective. It took 4 months to complete the integration with Italy. We simply cannot repeat the same process tens of times. It would take years.
+As time goes by, we received a lot of requests from people around the world. They all wanted us to integrate WHMCS & Billing Extension basically with e-invoicing of ANY country of the world. Even though we would like to integrate all countries, this is prohibitive.
+
+Let us put it into perspective. It took 4 months to complete the integration with Italy. We simply cannot repeat the same process tens of times. It would take years.
 
 Instead of leaving non-Italian and non-Slovenian customers alone dealing with electronic invoicing, we came up with the idea of including a web service in Billing Extension that provides all data you might need to integrate WHMCS with e-invoicing of any country.
 
