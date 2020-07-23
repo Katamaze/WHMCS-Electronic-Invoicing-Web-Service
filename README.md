@@ -24,7 +24,15 @@ As time goes by, we received a lot of requests from people around the world. The
 
 Instead of leaving non-Italian and non-Slovenian customers alone dealing with electronic invoicing, we came up with the idea of including a web service in Billing Extension that provides all data you might need to integrate WHMCS with e-invoicing of any country.
 
-We underline that even if you don't need to comply to e-invoicing regulations, you can use the web service also for different purposes. For example you could use it to integrate WHMCS with any accounting software or intranet. Below you can see an example of data 
+We underline that web service can be used also for different purposes. For example you could use it to integrate WHMCS with any accounting software or intranet. Below you can see how the web service responds to incoming requests in JSON. There's everything:
+
+* Client details
+  * Firstname, lastname, email...
+  * Client custom fields
+  * Region, intra/extra EU, federation, monetary union, VIES, MOSS
+* Invoice details
+  * Document type (proforma, invoice or credit note)
+  * Invoice items
 
 ```
 {
@@ -108,10 +116,23 @@ We underline that even if you don't need to comply to e-invoicing regulations, y
 }
 ```
 
-The first public release of Billing Extension was 2014. Since then at the moment of writing this there have been 212 releases. As you can imagine 
+# Enabling Web Service
 
-* [Billing errors detection](https://katamaze.com/docs/billing-extension/28/warning-system)
-* Snapshot customer and your [business's](https://katamaze.com/docs/billing-extension/23/company-profile) details
-* [VIES](https://katamaze.com/docs/billing-extension/8/vies) that actually works
+First. Open `Addons > Billing Extension > Settings` and click the `+` icon to display this page.
 
-Sadly [WHMCS doesn't offer a valid billing system](https://katamaze.com/blog/23/what-is-whmcs-and-when-to-use-it-explained-for-beginners#Weaknesses-of-WHMCS). 
+![image](https://katamaze.com/modules/addons/Mercury/uploads/files/Documentation/d73d422c17dda17218706f69299f3c97/whmcs-invoice-web-service-sm.png)
+
+Second. Locate and enable `WebService` from plugin list. When prompted go back Settings page where you'll find this new section.
+
+![image](https://katamaze.com/modules/addons/Mercury/uploads/files/Documentation/d73d422c17dda17218706f69299f3c97/whmcs-webservice-api-invoicing-token.png)
+
+Third. Click the orange button to randomly generate a token to secure transmissions via web service. Note down the token.
+
+# Authentication
+
+Autentication process is very simple and requires two parameters.
+
+| Parameter | Description | Required |
+| ------------- | ------------- | ------------- |
+| URL | URL to the root of WHMCS that can be found on `Setup > General Settings > General > WHMCS SystemURL`. Trailing slash `/` is required. | Yes |
+| Token | Must be equal to the one you have in `Addons > Billing Extension > Settings > WebService > Token` | Yes |
