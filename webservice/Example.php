@@ -3,8 +3,8 @@
 /**
  * Documentation
  *
- * @english   https://katamaze.com/docs/billing-extension/38/webservice ]
- * @italian   https://katamaze.it/docs/billing-extension/38/webservice ]
+ * @english   https://katamaze.com/docs/billing-extension/38/webservice
+ * @italian   https://katamaze.it/docs/billing-extension/38/webservice
  * @github    https://github.com/Katamaze/WHMCS-Electronic-Invoicing-Web-Service 
  */
 
